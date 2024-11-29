@@ -1,222 +1,174 @@
-# Angry Birds Game
+# Angry Birds Game - Java LibGDX Implementation
 
-This project is a simplified version of the Angry Birds game built in Java using the libGDX framework. It includes various bird and block types, each with unique characteristics. Birds inherit from a base `Bird` class, blocks inherit from a base `Block` class, and pigs are represented by the `Pig` class.
+This project is a simplified version of the classic Angry Birds game, developed in Java using the libGDX framework. It features various bird types, blocks, and pigs, each with unique characteristics, to provide engaging and strategic gameplay.
 
 ## Table of Contents
-
+- [Introduction](#introduction)
+- [Features](#features)
 - [Installation](#installation)
 - [Usage](#usage)
-- [Features](#features)
+- [Gameplay Instructions](#gameplay-instructions)
 - [Code Structure](#code-structure)
   - [Bird Classes](#bird-classes)
   - [Block Classes](#block-classes)
-  - [Level Classes](#level-classes)
-  - [Slingshot Class](#slingshot-class)
   - [Pig Classes](#pig-classes)
-- [Screens](#screens)
-  - [Home Screen](#home-screen)
-  - [Level Screens](#level-screens)
-  - [Level Selection Screen](#level-selection-screen)
-  - [Win Screen](#win-screen)
-  - [Lose Screen](#lose-screen)
-  - [Pause Screen](#pause-screen)
-- [Core Class](#core-class)
-- [Gameplay Instructions](#gameplay-instructions)
+  - [Slingshot Mechanism](#slingshot-mechanism)
+  - [Level Classes](#level-classes)
+  - [Game Screens](#game-screens)
+- [Testing](#testing)
+- [Contributing](#contributing)
+- [License](#license)
+- [Contact](#contact)
 
-## Installation
+## Introduction
 
-1. **Prerequisites**:
-   - Install [libGDX](https://libgdx.com/) and configure it in your development environment.
-   - Use a Java IDE like IntelliJ IDEA or Eclipse.
-
-2. **Clone the Repository**:
-   - Clone the repository and open it in your IDE.
-
-3. **Dependencies**:
-   - Ensure that the libGDX libraries are included in your project setup.
-
-## Usage
-
-- Run the game within your IDE to start the Angry Birds-style gameplay.
-- Experience different types of birds and blocks, each with distinct functionalities and behaviors.
+Welcome to the Angry Birds Game built with Java and libGDX! This project aims to recreate the fun and challenge of the original game by allowing players to launch various birds at pigs strategically placed within structures made of different materials. The physics-based gameplay ensures a realistic and enjoyable experience.
 
 ## Features
 
-- **Variety of Bird Types**: Each bird type offers unique abilities, such as:
-  - **BlueBird**: Splits into three smaller birds, increasing the chances of hitting multiple targets.
-  - **YellowBird**: Gains a speed boost, enabling rapid movement and greater impact.
-  - **RedBird**: A balanced bird without special abilities, suitable for straightforward play.
+### Multiple Bird Types:
+- **Red Bird**: A balanced bird with no special abilities.
+- **Yellow Bird**: Can accelerate mid-flight for increased speed and impact.
+- **Blue Bird**: Can split into three smaller birds mid-flight, increasing the chances of hitting multiple targets.
 
-- **Multiple Block Types**: Different materials impact gameplay mechanics:
-  - **Glass Blocks**: Fragile, easily destroyed, providing strategic options for bird choice.
-  - **Wood Blocks**: Moderate durability, needing more force or precision to break.
-  - **Stone Blocks**: Highly durable, requiring strong birds or careful strategy.
+### Variety of Blocks:
+- **Glass Blocks**: Fragile and easily destroyed.
+- **Wood Blocks**: Moderate durability, requiring more force to break.
+- **Stone Blocks**: Highly durable, requiring precise hits.
 
-- **Challenging Levels**: Levels increase in difficulty, with varying block placements, bird types, and pig configurations to test player skills.
+### Pigs:
+- Different sizes and health levels.
+- Strategically positioned to increase difficulty.
 
-- **Physics-Driven Gameplay**: Utilizes libGDX’s physics engine for realistic launching and collision effects, enhancing game immersion.
+### Levels:
+- Multiple levels with increasing difficulty.
+- Each level offers unique configurations of birds, pigs, and blocks.
+- Ability to save and load levels.
 
-- **Level Selection Menu**: Players can choose levels from a dedicated menu, with locked levels shown to encourage progression.
+### Game Screens:
+- **Home Screen**: Start a new game, load a game, or exit.
+- **Level Selection Screen**: Choose from unlocked levels.
+- **Win/Lose Screens**: Display results after level completion or failure.
+- **Pause Screen**: Pause the game with options to resume, restart, or exit.
 
-- **Pause and Resume**: Players can pause the game at any time to access a menu with options to resume or return to the home screen.
+### Physics-Based Gameplay:
+- Realistic launching, movement, and collision using libGDX's physics engine.
 
-- **Win and Lose Screens**: Displays player performance at the end of a level, offering options to retry or move forward.
+### User Interface:
+- Interactive slingshot mechanism.
+- On-screen buttons and dialogs for navigation and game control.
 
-## Code Structure
+## Installation
 
-### Bird Classes
+### Prerequisites
+- Java Development Kit (JDK) 8 or higher
+- libGDX Framework
+- Integrated Development Environment (IDE) like IntelliJ IDEA or Eclipse
 
-Each bird type extends the base `Bird` class, which provides shared properties such as texture, position, and velocity.
+### Setup Instructions
 
-#### 1. Bird.java
+1. **Clone the Repository**:
+    ```bash
+    git clone https://github.com/your-repo/angry-birds.git
+    ```
 
-The `Bird` class serves as the base class for all bird types, handling:
-- **Texture**: Bird’s visual representation.
-- **Position**: Bird’s screen location.
-- **Velocity**: Bird’s speed and direction.
+2. **Import the Project**:
+  - Open your IDE.
+  - Import the project as a Gradle or Maven project.
 
-##### Main Methods:
-- `update(float delta)`: Updates the bird’s position based on velocity.
-- `draw(SpriteBatch batch)`: Renders the bird at its position.
-- `dispose()`: Frees texture memory.
-- `setVelocity(Vector2 velocity)`: Sets bird velocity.
-- `getPosition()` and `getVelocity()`: Retrieve position and velocity.
+3. **Install Dependencies**:
+  - Ensure all libGDX libraries are correctly configured in your project.
+  - Install any additional dependencies specified in `build.gradle` or `pom.xml`.
 
-#### 2. BlueBird.java
+4. **Build the Project**:
+  - **For Gradle**: Run the build command.
+  - **For Maven**: Run the Maven build command.
 
-The `BlueBird` class extends `Bird`, adding a `split` ability.
-- **split()**: Function representing bird splitting into smaller entities.
+## Usage
 
-#### 3. RedBird.java
-
-The `RedBird` class extends `Bird` without additional abilities.
-
-#### 4. YellowBird.java
-
-The `YellowBird` class extends `Bird`, featuring a `speedBoost` ability.
-- **speedBoost()**: Increases the bird’s speed for a short duration.
-
-### Block Classes
-
-Each block type inherits from the base `Block` class, which provides properties like texture and position.
-
-#### 1. Block.java
-
-`Block` serves as the base class for all block types, defining:
-- **Texture**: Block’s visual representation.
-- **Position**: Block’s screen location.
-
-##### Main Methods:
-- `draw(SpriteBatch batch)`: Renders the block.
-- `dispose()`: Releases resources.
-- `setPosition(float x, float y)`: Sets block position.
-- `getPosition()`: Retrieves position.
-
-#### 2. GlassBlock.java
-
-The `GlassBlock` class represents a glass-type block, inheriting from `Block`.
-- Texture: `glass_block.png`
-
-#### 3. StoneBlock.java
-
-The `StoneBlock` class represents a stone-type block.
-- Texture: `steel_block.png`
-
-#### 4. WoodBlock.java
-
-The `WoodBlock` class represents a wood-type block.
-- Texture: `WoodBlock.png`
-
-### Level Classes
-
-Each level is implemented as a separate class, inheriting from an abstract base class.
-
-#### 1. Level.java
-
-The `Level` base class defines common attributes and methods for initializing birds, pigs, and blocks.
-
-##### Main Methods:
-- `initializeBirds()`: Abstract method for setting up birds.
-- `initializePigs()`: Abstract method for setting up pigs.
-- `initializeBlocks()`: Abstract method for setting up blocks.
-- `show()`: Displays the level.
-
-#### Level1.java, Level2.java, Level3.java
-
-Each class defines specific configurations of birds, pigs, and blocks for progressively challenging gameplay.
-
-### Slingshot Class
-
-The `Slingshot` class manages bird launching mechanics.
-
-##### Main Methods:
-- `pullBack(float distance)`: Simulates pulling the slingshot.
-- `release()`: Launches the bird toward targets.
-
-### Pig Classes
-
-Each pig type inherits from a base `Pig` class, which defines shared properties and methods for drawing and taking damage.
-
-#### Pig.java
-
-Defines common pig properties such as health and position.
-
-##### Main Methods:
-- `draw(SpriteBatch batch)`: Renders the pig.
-- `takeDamage(int damage)`: Reduces health; the pig is destroyed if health reaches zero.
-- `dispose()`: Releases resources.
-- `getPosition()` and `getHealth()`: Retrieve position and health.
-
-#### SmallPig, MediumPig, LargePig
-
-Each pig type differs in health, size, and appearance, impacting the strategy required to defeat them.
-
-## Screens
-
-### Home Screen
-
-- Displays the game title with options for **New Game**, **Load Game**, and **Exit**.
-- "New Game" starts gameplay.
-
-### Level Screens
-
-#### Level 1 Screen
-- First level setup with specific birds, pigs, and blocks.
-- Includes a "Pause" button.
-
-#### Level 2 & Level 3 Screens
-- Additional levels with more complex configurations of birds, pigs, and blocks.
-
-### Level Selection Screen
-
-- Displays available levels; players can start any unlocked level or return to the home screen.
-
-### Win Screen
-
-- Appears after successfully completing a level.
-- Displays the score and offers options to proceed, retry, or return to the level selection screen.
-
-### Lose Screen
-
-- Appears when the player runs out of birds or fails to complete the level.
-- Displays the score and options to retry or return to the level selection screen.
-
-### Pause Screen
-
-- Displays upon pausing the game.
-- Shows the current score and the following options:
-  - **Resume**: Continue playing.
-  - **Return to Level Selection**: Go back to level selection.
-  - **Restart**: Restart the level.
-  - **Exit**: Return to the home screen.
-
-## Core Class
-
-The `Core` class initializes and manages the game, starting with the `HomeScreen`. It uses a `SpriteBatch` for rendering, and its main methods (`create`, `render`, and `dispose`) handle game resources and screen transitions.
+### Running the Game
+- **From the IDE**: Run the `Core` class's `main` method.
+- **From the Command Line**: Use the appropriate command for your build system (Gradle/Maven).
 
 ## Gameplay Instructions
 
-- **Set Angle**: Adjust the launch angle with the **Angle** slider.
-- **Set Power**: Adjust the launch strength with the **Power** slider.
-- **Launch**: Press the **Launch** button to fire the bird.
-- **Objective**: Destroy all pigs in a level to progress to the next one.
+## Selecting and Launching Birds
+
+### Select a Bird:
+- Click on the desired bird from the available pool to select it for launch.
+
+### Adjust Launch Parameters:
+- **Angle Slider**: Use the angle slider to set the desired launch angle.
+- **Power Slider**: Use the power slider to adjust the launch strength.
+
+### Launch the Bird:
+- Press the **Launch** button to fire the selected bird with the specified angle and power.
+
+
+### Special Abilities:
+- **Yellow Bird**: Press the Space key during flight to activate the speed boost.
+- **Blue Bird**: Press the Space key during flight to split into three birds.
+- **Red Bird**: Press the Space key during flight to temporarily increase its size, making it more impactful upon collision.
+
+
+### Objective:
+- Destroy all pigs in the level using the available birds.
+
+### Pause Game:
+- Press the "Pause" button or the P key to pause the game.
+
+## Code Structure
+
+## Bird Classes
+All bird types extend the base `Bird` class, which handles common properties like position, texture, and physics body.
+
+- **Bird.java**: Base class for all birds. Manages physics body, state, and movement.
+- **RedBird.java**:  Overrides the `activateAbility()` method is triggered, it temporarily increases the bird's size, enhancing its impact during collisions.
+- **YellowBird.java**: Overrides the `activateAbility()` method to implement speed boost.
+- **BlueBird.java**: Overrides the `activateAbility()` method to implement splitting into multiple birds.
+
+### Block Classes
+Blocks inherit from the base `Block` class, defining the structure's appearance and physical properties.
+
+- **Block.java**: Base class for blocks. Manages texture, position, and physics body.
+- **GlassBlock.java**, **WoodBlock.java**, **StoneBlock.java**: Represent blocks of different materials with varying durability.
+
+### Pig Classes
+Pigs are represented by the `Pig` class, implementing the necessary properties and methods for gameplay.
+
+- **Pig.java**: Handles health, position, and reactions to collisions.
+
+### Slingshot Mechanism
+The `Slingshot` class manages the launching of birds.
+
+- **Slingshot.java**: Draws the slingshot on the screen. Handles input for adjusting angle and power. Launches birds with calculated force.
+
+### Level Classes
+Levels are implemented as separate classes, inheriting from the `Level` base class.
+
+- **Level.java**: Abstract base class containing common level functionality.
+- **Level1.java**, **Level2.java**, **Level3.java**: Define specific configurations of birds, pigs, and blocks. Implement unique challenges for the player.
+
+### Game Screens
+Different screens manage various game states and navigation.
+
+- **HomeScreen.java**: The starting screen of the game. Options to start a new game, load a game, or exit.
+- **LevelSelectionScreen.java**: Allows players to select from available levels. Unlocked levels are accessible based on progression.
+- **WinScreen.java**: Displayed upon successful completion of a level. Provides options to proceed to the next level, retry, or return to level selection.
+- **LoseScreen.java**: Displayed when the player fails a level. Provides options to retry or return to level selection.
+- **PauseScreen.java**: Activated during gameplay to pause the game. Options to resume, restart the level, or exit to the main menu.
+
+## Testing
+
+The project includes unit tests to ensure code reliability and functionality.
+
+### JUnit Tests:
+- Located in the `test` directory.
+- Test classes for `Level`, `Bird`, `Block`, and other components.
+
+### Running Tests
+
+- **From the Command Line**: Run the tests with your build system (Gradle/Maven).
+- **From IDE**: Right-click the test directory and select "Run All Tests".
+
+
